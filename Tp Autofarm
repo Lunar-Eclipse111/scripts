@@ -1,4 +1,4 @@
-getgenv().Autofarm = true
+getgenv().Autofarm = false
 
 if shared.n2autofarm then shared.n2autofarm:Disconnect();end;
 local Players = game:GetService("Players");
