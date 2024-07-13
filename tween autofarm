@@ -1,0 +1,157 @@
+game:GetService("AdService"):ClearAllChildren()
+    wait(1)
+    
+    local Player = game.Players.LocalPlayer
+    local wS = game.Workspace
+    local cam = wS.CurrentCamera
+    local mouse = Player:GetMouse()
+    local ClosestPlr = function()
+        local Closest = nil
+        local Distance = 9e9;
+        for i,v in pairs(game.Players:GetPlayers()) do
+            if v ~= Player then
+                if wS[v.Name]:FindFirstChild("Humanoid") and wS[v.Name].Humanoid.Health ~= 0 then
+                    local pos = cam:WorldToViewportPoint(wS[v.Name].HumanoidRootPart.Position)
+                    local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(mouse.X, mouse.Y)).magnitude;
+                    if magnitude < Distance then
+                        Closest = wS[v.Name]
+                        Distance = magnitude
+                    end
+                end
+            end
+        end
+        return Closest
+    end
+    
+    game:GetService('RunService').RenderStepped:connect(function()
+        for i,v in pairs(game.Workspace.KnifeHost:GetDescendants()) do
+            if v:IsA"Part" then
+                if v.Archivable == true then
+                    local plrpos  = ClosestPlr().baseHitbox.CFrame
+                    v.CFrame = plrpos
+                end
+            end
+        end
+    end)
+    
+    game:GetService("RunService").Stepped:Connect(function()
+        local function randompart()
+            local hits = {
+                0,
+                1,
+                2,
+                -1,
+                -2,
+            }
+            return hits[math.random(1, #hits)]
+        end
+                if game.Players.LocalPlayer.Backpack:FindFirstChild("Knife") then
+                    for i, v in pairs(game.Players:GetPlayers()) do
+                        if v.Name == game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.UI.Target.TargetText.Text then
+                            if v.Name ~= game.Players.LocalPlayer.Name then
+                                game.Players.LocalPlayer.Character.Humanoid:EquipTool(Game.Players.LocalPlayer.Backpack.Knife)
+                                wait(.3)
+                                local Target = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.UI.Target.TargetText.Text
+                                local x = game.Workspace[Target].HumanoidRootPart.Position.X + randompart()
+                                local y = game.Workspace[Target].HumanoidRootPart.Position.Y + randompart()
+                                local z = game.Workspace[Target].HumanoidRootPart.Position.Z + randompart()
+                                local args = {
+                                    [1] = Vector3.new(x, y, z),
+                                    [2] = 0,
+                                    [3] = CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+                                }
+                                game:GetService("ReplicatedStorage").Remotes.ThrowKnife:FireServer(unpack(args))
+                                wait(.1)
+                                game:GetService("Players").localPlayer.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
+                                wait(.6)
+                            end
+                        end
+                    end
+                end
+    end)
+    
+    function GetTime(Distance, Speed)
+        local Time = Distance / Speed
+        return Time
+    end
+    
+    function oreoTween(targetpart,oreospeed)
+        local Speed = oreospeed  local Distance = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - targetpart.Position).magnitude local Time = GetTime(Distance, Speed) local TweenService = game:GetService("TweenService") local oreottable = TweenInfo.new( Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out,  0, false, 0 ) local Tween = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart,oreottable,{CFrame = targetpart.CFrame}) Tween:Play()
+    end
+    local Player = game:GetService("Players").LocalPlayer
+    local wS = game:GetService("Workspace")
+    
+    local ClosestPlayer = function()
+        local Closest = nil
+        local Distance = 9e9
+        for i, v in next, game:GetService("Players"):GetPlayers() do
+            if v.Name ~= Player.Name then
+                if wS[v.Name] and wS[v.Name]:FindFirstChild("Humanoid") and wS[v.Name]:FindFirstChild("Humanoid").Health ~= 0 then
+                    local Magnitude = (Player.Character.Head.Position - wS[v.Name].Head.Position).Magnitude
+                    if Magnitude < Distance then
+                        Closest = wS[v.Name]
+                        Distance = Magnitude
+                        end
+                    end
+                end
+            end
+        return Closest
+    end
+    
+    local Stab = 10
+    
+    spawn(function()
+        while Stab > 0 do
+            repeat wait() until Player.Character:FindFirstChild("Head")
+                if Player:DistanceFromCharacter(ClosestPlayer().Head.Position) <= 6.5 then
+                    Player.PlayerScripts.localknifehandler.HitCheck:Fire(ClosestPlayer())
+                    wait(.7)
+                else
+                    wait()
+                end
+        end
+    end)
+    
+    game:GetService("RunService").Stepped:Connect(function()
+    game.Workspace.Gravity = -2
+    game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+        oreoTween(game.Workspace[game.Players.LocalPlayer.PlayerGui.ScreenGui:WaitForChild("UI"):WaitForChild("Target"):WaitForChild("TargetText").Text].HumanoidRootPart,34)
+        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            pcall(function()
+                if v.ClassName == "Part" then
+                    v.CanCollide = false
+                elseif v.ClassName == "Model" then
+                    v.Head.CanCollide = false
+                end
+            end)
+        end
+    end)
+    
+    task.spawn(function()
+
+    --- animation
+
+        game.RunService.Heartbeat:Connect(function()
+            for i,v in pairs(game:GetService('Players'):GetChildren()) do
+       AnimationId = "429703734"
+       local Anim = Instance.new("Animation")
+       Anim.AnimationId = "rbxassetid://"..AnimationId
+       local animplay = game:GetService('Players').LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+       animplay:Play()
+       animplay:AdjustSpeed(2)
+    end
+    end)
+    end)
+
+    task.spawn(function()
+        game:GetService("RunService").Heartbeat:connect(function()
+            local hrp = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+            -- spining
+        hrp.CFrame = hrp.CFrame * CFrame.Angles(0,math.rad(10),0)
+        wait(0.01)
+game.Players.LocalPlayer.Character['Right Leg']:remove()
+game.Players.LocalPlayer.Character['Left Leg']:remove()
+
+        end)
+    end)
