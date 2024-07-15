@@ -32,6 +32,9 @@ TargetFrame.Changed:Connect(function()
 if getgenv().Autofarm == true then
 game.Workspace.GameMap:Remove()
 end
+        if getgenv().Autofarm == false then
+workspace.Gravity = 196.2;
+end
 
 end);
 TargetText.Changed:Connect(function()
