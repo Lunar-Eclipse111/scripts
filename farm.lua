@@ -96,9 +96,7 @@ shared.n2autofarm = game:GetService("RunService").Heartbeat:Connect(function()
         TargetCharacter = workspace:FindFirstChild(Target.Name);
         TargetRootPart = TargetCharacter and TargetCharacter:FindFirstChild("HumanoidRootPart");
 
-if getgenv().Autofarm == false then
- workspace.Gravity = 196.2;
-end
+
 
 
     --Teleport
