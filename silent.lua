@@ -1,4 +1,3 @@
-
 local Player = game:GetService("Players").LocalPlayer
     local Camera = game:GetService("Workspace").CurrentCamera
     local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
