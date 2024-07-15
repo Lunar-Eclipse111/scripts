@@ -9,7 +9,7 @@ local Player = game:GetService("Players").LocalPlayer
     FOV_Circle.NumSides = 8
     FOV_Circle.Radius = 200
     
-    FOV_Circle.Visible = true
+    FOV_Circle.Visible = false
     FOV_Circle.Filled = false
 
     game:GetService('RunService').Stepped:connect(function()
