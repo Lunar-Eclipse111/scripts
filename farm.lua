@@ -100,7 +100,7 @@ shared.n2autofarm = game:GetService("RunService").Heartbeat:Connect(function()
 
 
     --Teleport
- --     workspace.Gravity = -2;  -- -2
+ workspace.Gravity = -2;  -- -2
         LocalHumanoid:SetStateEnabled(15, false);
         TweenService:Create(
             LocalRootPart,
