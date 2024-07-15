@@ -102,7 +102,7 @@ end
 
 
     --Teleport
-        workspace.Gravity = -2;
+        workspace.Gravity = 196.2;;  -- -2
         LocalHumanoid:SetStateEnabled(15, false);
         TweenService:Create(
             LocalRootPart,
