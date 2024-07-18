@@ -4,6 +4,8 @@ local Settings = {
 	['Transparency'] = 0.4 -- 0 to 1 Transparency
 }
 
+getgenv().ESPClr = Color3.fromRGB(0,0,0)
+
 local ScreenGui = Instance.new('ScreenGui', game.CoreGui) -- Create screengui
 ScreenGui.IgnoreGuiInset = true
 
