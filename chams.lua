@@ -1,6 +1,6 @@
 local Settings = {
 	['Material'] = Enum.Material.Neon, -- Material
-	['Color'] = Color3.fromRGB(0,255,0), -- Color
+	['Color'] = Color3.fromRGB(0,0,0), -- Color
 	['Transparency'] = 0.4 -- 0 to 1 Transparency
 }
 
