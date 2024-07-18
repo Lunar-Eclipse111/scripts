@@ -31,7 +31,7 @@ function generateChasm(player) -- functions that generates chasms for the player
 				
 				Chasm.Parent = ViewportFrame
 				Chasm.Material = Settings.Material
-				Chasm.Color = Settings.Color
+				Chasm.Color = getgenv().ESPClr
 				Chasm.Anchored = true
 				
 				table.insert(Chasms, Chasm)
